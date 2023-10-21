@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class User extends Model
+class Round extends Model
 {
     use HasFactory;
 
-	public function rounds(): BelongsToMany
+	public function contestants(): BelongsToMany
     {
-        return $this->belongsToMany(Round::class, 'contestants');
+        return $this->belongsToMany(User::class, 'contestants');
     }
 }
