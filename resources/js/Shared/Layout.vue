@@ -17,7 +17,7 @@
 
 <style scoped>
 .main{
-	max-width: 1000px;
+	max-width: 800px;
 }
 
 .header{

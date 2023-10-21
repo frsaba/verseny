@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RacesController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,5 +18,7 @@ use function Termwind\render;
 */
 
 Route::get('/', function () {
-    return Inertia::render("Welcome");
+    return Inertia::render("Home");
 });
+
+Route::get('/races', [RacesController::class, 'index']);
