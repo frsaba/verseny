@@ -10,6 +10,8 @@ class Race extends Model
 {
     use HasFactory;
 
+	protected $fillable = ['name','year'];
+
 	public function rounds(): HasMany
     {
         return $this->hasMany(Round::class);

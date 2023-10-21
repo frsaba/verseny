@@ -10,7 +10,11 @@ export default {
 		async getRaces() {
 			const response = await axios.get('/races');
 			this.races = response.data;
-			console.log(this.races)
+		},
+		async createRace(name, year) {
+			await axios.post('/races', {name,year});
+			this.newRaceDialog = false;
+			this.getRaces();
 		}
 	},
 	mounted() {
@@ -20,6 +24,7 @@ export default {
 		name: "",
 		year: 2023,
 		races: [],
+		newRaceDialog: false,
 		nameRules: [
 			value => {
 				if (value) return true
@@ -41,14 +46,14 @@ export default {
 
 		<div class="d-flex justify-space-between flex-wrap">
 			<h2 class="text-overline">Versenyek</h2>
-			<v-dialog width="500">
+			<v-dialog width="500" v-model="newRaceDialog">
 				<template v-slot:activator="{ props }">
 					<v-btn color="success" v-bind="props"> <v-icon start>mdi-plus</v-icon> Új verseny felvétele </v-btn>
 				</template>
 
 				<template v-slot:default>
 					<v-card class="pa-5" title="Új verseny felvétele">
-						<v-form @submit.prevent class="mt-5">
+						<v-form @submit.prevent="createRace(name, year)" class="mt-5">
 							<v-text-field
 								v-model="name"
 								:rules="nameRules"
@@ -60,10 +65,10 @@ export default {
 								required
 								label="Év"></v-text-field>
 
-						</v-form>
-
 						<v-btn type="submit" color="success" block outline class="mt-2">
 							Új verseny</v-btn>
+						</v-form>
+
 					</v-card>
 				</template>
 			</v-dialog>

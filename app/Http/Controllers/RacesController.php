@@ -17,4 +17,20 @@ class RacesController extends Controller
 
 		return $data;
 	}
+
+	public function create(Request $request){
+		$request->validate([
+            'name' => 'required|string',
+            'year' => 'required|integer',
+        ]);
+
+		$race = new Race([
+			'name' => $request->input('name'),
+            'year' => $request->input('year'),
+		]);
+
+		$race->save();
+
+		//return $race;
+	}
 }
