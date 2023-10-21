@@ -14,6 +14,7 @@
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/inertia-vue": "^0.8.0",
         "@inertiajs/vue3": "^1.0.12",
+        "@mdi/font": "^7.3.67",
         "@vitejs/plugin-vue": "^4.4.0",
         "vue": "^3.3.6",
         "vuetify": "^3.3.22"
