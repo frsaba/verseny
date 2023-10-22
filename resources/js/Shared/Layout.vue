@@ -4,26 +4,30 @@ import { Link } from '@inertiajs/vue3'
 
 <template>
 	<v-app>
-		<v-app-bar class="px-6 header bg-primary">
+		<v-app-bar prominent class="px-6 header bg-primary">
 			<div class="d-flex align-center">
 				<v-icon start>mdi-flag-checkered</v-icon>
 				<h1>TrackMaster</h1>
 			</div>
 			<v-spacer></v-spacer>
 			<nav>
-				<Link href="/" :style="{disabled : true}">Versenyek</Link>
-				<Link href="/users">Felhasználók</Link>
+				<Link href="/" :class="{ disabled: $page.url == '/' }">
+					Versenyek
+				</Link>
+				<Link href="/users" :class="{ disabled: $page.url.startsWith('/users') }">
+					Felhasználók
+				</Link>
 			</nav>
 		</v-app-bar>
 		<section class="pa-2">
-			<div class="main mx-auto">
+			<div class="main mx-auto px-2">
 				<slot />
 			</div>
 		</section>
 	</v-app>
 </template>
 
-<style scoped>
+<style>
 .main {
 	max-width: 800px;
 	margin-top: 5em;
@@ -42,12 +46,13 @@ a {
 	color: white;
 }
 
-a.disabled{
-	color: gray;
+a.disabled {
+	color: lightgray;
 }
 
-.header {
-	display: flex;
+.v-toolbar__content {
+	flex-wrap: wrap;
 	gap: 0.2em;
+	height: 5em !important;
 }
 </style>
