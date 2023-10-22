@@ -4,8 +4,7 @@ import RaceInfo from "../Shared/RaceInfo.vue";
 import axios from "axios";
 
 export default {
-	layout: Layout,
-	components: { RaceInfo },
+	components: { RaceInfo, Layout },
 	methods: {
 		async getRaces() {
 			const response = await axios.get('/races');
@@ -42,7 +41,7 @@ export default {
 </script>
 
 <template>
-	<div>
+	<layout>
 		
 		<div class="d-flex justify-space-between flex-wrap">
 			
@@ -78,7 +77,7 @@ export default {
 		<section class="races mt-5">
 			<race-info v-for="race of races" :key="race.id" v-bind="race" @new-round="getRaces"></race-info>
 		</section>
-	</div>
+	</layout>
 </template>
 
 <style scoped>
