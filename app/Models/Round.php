@@ -11,6 +11,8 @@ class Round extends Model
 {
     use HasFactory;
 
+	protected $fillable = ['race_id'];
+
 	public function race(): BelongsTo
     {
         return $this->belongsTo(Race::class);

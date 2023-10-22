@@ -12,7 +12,7 @@ export default {
 			this.races = response.data;
 		},
 		async createRace(name, year) {
-			await axios.post('/races', {name,year});
+			await this.$inertia.post('/races', {name,year});
 			this.newRaceDialog = false;
 			this.getRaces();
 		}
@@ -43,8 +43,9 @@ export default {
 
 <template>
 	<div>
-
+		
 		<div class="d-flex justify-space-between flex-wrap">
+			
 			<h2 class="text-overline">Versenyek</h2>
 			<v-dialog width="500" v-model="newRaceDialog">
 				<template v-slot:activator="{ props }">
@@ -75,7 +76,7 @@ export default {
 
 		</div>
 		<section class="races mt-5">
-			<race-info v-for="race of races" :key="race.id" v-bind="race"></race-info>
+			<race-info v-for="race of races" :key="race.id" v-bind="race" @new-round="getRaces"></race-info>
 		</section>
 	</div>
 </template>

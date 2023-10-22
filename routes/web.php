@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RacesController;
+use App\Http\Controllers\RoundsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +24,4 @@ Route::get('/', function () {
 
 Route::get('/races', [RacesController::class, 'index']);
 Route::post('/races', [RacesController::class, 'create']);
+Route::post('/races/{id}/rounds', [RoundsController::class, 'create']);
