@@ -31,4 +31,8 @@ class UsersController extends Controller
 
 		return $this->index();
 	}
+
+	public function destroy(Request $request){
+		
+	}
 }

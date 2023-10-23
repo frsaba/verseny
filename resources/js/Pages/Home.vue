@@ -14,8 +14,17 @@ export default {
 			this.races = response.data;
 		},
 		async createRace(name, year) {
+			name = name.trim();
+
+			//if race already exists, show an error
+			if(this.races.some(r => r.name == name && r.year == year)){
+				this.errors.push("Ez a verseny már létezik!")
+				return;
+			}
+
 			await this.$inertia.post('/races', { name, year });
 			this.newRaceDialog = false;
+			this.errors = []
 			this.getRaces();
 		},
 		openAddContestantDialog({ raceID, round }) {
@@ -24,9 +33,13 @@ export default {
 		},
 		async addToRound( round, user) {
 			await this.$inertia.post(`/rounds/${round.id}/contestants`, { user_id: user });
-			this.getRaces();
 			this.addToRoundDialog = false;
 			this.selectedContestant = null;
+			this.getRaces();
+		},
+		async removeUser( roundID, user) {
+			await this.$inertia.delete(`/rounds/${roundID}/contestants/${user}`);
+			this.getRaces();
 		}
 	},
 	computed:
@@ -46,8 +59,9 @@ export default {
 		races: [],
 		newRaceDialog: false,
 		addToRoundDialog: false,
-		selectedContestant: "",
+		selectedContestant: null,
 		selectedRound: null,
+		errors: [],
 		roundID: -1,
 		nameRules: [
 			value => {
@@ -79,11 +93,14 @@ export default {
 				<template v-slot:default>
 					<v-card class="pa-5" title="Új verseny felvétele">
 						<v-form @submit.prevent="createRace(newRaceName, newRaceYear)" class="mt-5">
-							<v-text-field v-model="newRaceName" :rules="nameRules" required label="Név"></v-text-field>
-							<v-text-field v-model.number="newRaceYear" :rules="yearRules" required
+							<div class="errors text-center mb-2">
+								<span color="error" v-for="error of errors">{{ error }}</span>
+							</div>
+							<v-text-field v-model="newRaceName" :rules="nameRules" required label="Név" @change="errors = []"></v-text-field>
+							<v-text-field v-model.number="newRaceYear" :rules="yearRules" required @change="errors = []"
 								label="Év"></v-text-field>
 
-							<v-btn type="submit" color="success" block outline class="mt-2">
+							<v-btn type="submit" :disabled="errors.length > 0" color="success" block outline class="mt-2">
 								Új verseny</v-btn>
 						</v-form>
 
@@ -105,7 +122,7 @@ export default {
 		</div>
 		<section class="races mt-5">
 			<race-info v-for="race of races" :key="race.id" v-bind="race" @new-round="getRaces"
-				@add-contestant="openAddContestantDialog"></race-info>
+				@add-contestant="openAddContestantDialog" @delete-user="removeUser"></race-info>
 		</section>
 	</layout>
 </template>
@@ -115,5 +132,10 @@ export default {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
+}
+.errors{
+	font-style: italic;
+	color: red;
+	height: 1.2em;
 }
 </style>

@@ -3,6 +3,7 @@ defineProps({
 	users: Array,
 	compact: Boolean
 })
+defineEmits(['delete-user'])
 </script>
 
 <template>
@@ -21,6 +22,9 @@ defineProps({
 			<tr v-for="item in users" :key="item.name">
 				<td>{{ item.name }}</td>
 				<td>{{ item.email }}</td>
+				<td width="1em">
+					<v-btn @click="this.$emit('delete-user', item.id)" size="x-small" variant="outlined" color="error" icon="mdi-trash-can-outline"></v-btn>
+				</td>
 			</tr>
 		</tbody>
 	</v-table>

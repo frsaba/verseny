@@ -34,3 +34,4 @@ Route::get('/races', [RacesController::class, 'index']);
 Route::post('/races', [RacesController::class, 'create']);
 Route::post('/races/{id}/rounds', [RoundsController::class, 'create']);
 Route::post('/rounds/{id}/contestants', [ContestantsController::class, 'create']);
+Route::delete('/rounds/{id}/contestants/{user_id}', [ContestantsController::class, 'destroy']);

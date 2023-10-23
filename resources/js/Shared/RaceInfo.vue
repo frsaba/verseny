@@ -9,7 +9,7 @@ const props = defineProps({
 	rounds: Array
 });
 
-const emit = defineEmits(['new-round', 'add-contestant'])
+const emit = defineEmits(['new-round', 'add-contestant', 'delete-user'])
 
 function newRound() {
 	axios.post(`/races/${props.id}/rounds`, {});
@@ -39,8 +39,8 @@ function newRound() {
 						Versenyző felvétele
 					</v-btn>
 				</div>
-				<users-table :users="round.contestants" :compact="true"></users-table>
-				<hr width="90%" class="mx-auto mb-5">
+				<users-table :users="round.contestants" :compact="true" @delete-user="(userID) => this.$emit('delete-user', round.id, userID)"></users-table>
+				<hr width="90%" class="mx-auto my-5">
 			</div>
 			<v-btn color="primary" @click="newRound"><v-icon>mdi-plus</v-icon> Új forduló</v-btn>
 		</div>
