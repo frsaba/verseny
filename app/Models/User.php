@@ -10,6 +10,8 @@ class User extends Model
 {
     use HasFactory;
 
+	protected $fillable = ['name', 'email'];
+
 	public function rounds(): BelongsToMany
     {
         return $this->belongsToMany(Round::class, 'contestants');

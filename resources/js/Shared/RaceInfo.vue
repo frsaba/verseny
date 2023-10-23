@@ -31,7 +31,7 @@ function newRound(){
 		<div class="rounds">
 			<div class="px-5" v-for="round, n in rounds" :key="round.id">
 				<span class="text-overline">{{n+1}}.forduló {{ round.contestants && round.contestants.length > 0 ? "versenyzői:" : "" }}</span>
-				<users-table :users="round.contestants"></users-table>
+				<users-table :users="round.contestants" :compact="true"></users-table>
 				<hr width="90%" class="mx-auto mb-5">
 			</div>
 			<v-btn color="primary" @click="newRound"><v-icon>mdi-plus</v-icon> Új forduló</v-btn>

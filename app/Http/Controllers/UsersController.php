@@ -14,4 +14,21 @@ class UsersController extends Controller
 
 		return Inertia::render('Users', $data);
 	}
+
+	public function create(Request $request){
+		$request->validate([
+            'name' => 'required|string',
+            'email' => 'required|string',
+        ]);
+
+		$user = new User([
+			'name' => $request->input('name'),
+            'email' => $request->input('email'),
+		]);
+
+		$user->save();
+
+
+		return $this->index();
+	}
 }

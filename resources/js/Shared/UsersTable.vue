@@ -1,11 +1,12 @@
 <script setup>
 defineProps({
-	users: Array
+	users: Array,
+	compact: Boolean
 })
 </script>
 
 <template>
-	<v-table density="compact" v-if="users && users.length > 0">
+	<v-table :density="compact ? 'compact' : 'comfortable'" v-if="users && users.length > 0">
 		<thead>
 			<tr>
 				<th class="text-left">

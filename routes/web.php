@@ -24,6 +24,8 @@ Route::get('/', function () {
 });
 
 Route::get('/users', [UsersController::class, 'index']);
+Route::post('/users', [UsersController::class, 'create']);
+
 Route::get('/races', [RacesController::class, 'index']);
 Route::post('/races', [RacesController::class, 'create']);
 Route::post('/races/{id}/rounds', [RoundsController::class, 'create']);
