@@ -9,6 +9,7 @@ export default {
 		async getRaces() {
 			const response = await axios.get('/races');
 			this.races = response.data;
+			console.log(this.races)
 		},
 		async createRace(name, year) {
 			await this.$inertia.post('/races', {name,year});

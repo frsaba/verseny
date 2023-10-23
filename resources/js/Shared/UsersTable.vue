@@ -5,7 +5,7 @@ defineProps({
 </script>
 
 <template>
-	<v-table v-if="users">
+	<v-table density="compact" v-if="users && users.length > 0">
 		<thead>
 			<tr>
 				<th class="text-left">

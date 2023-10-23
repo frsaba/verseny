@@ -11,11 +11,20 @@ class RacesController extends Controller
 {
 	public function index()
 	{
-		$data = Race::with(['rounds' => function ($query) {
-			$query->select('race_id', 'id', 'time');
-		}])->select('id', 'name', 'year')->get();
+		// $data = Race::with(['rounds' => function ($query) {
+		// 	$query->select('race_id', 'id', 'time');
+		// }])->select('id', 'name', 'year')->get();
 
-		return $data;
+		$allRaces = Race::with(['rounds' => function ($query) {
+			$query->select('id', 'race_id', 'time');
+			$query->with(['contestants' => function ($query) {
+				$query->select('users.id', 'name', 'email');
+			}]);
+		}])
+		->select('id', 'name', 'year')
+		->get();
+
+		return $allRaces;
 	}
 
 	public function create(Request $request){
