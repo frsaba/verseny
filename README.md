@@ -6,7 +6,7 @@ composer install
 yarn
 ```
 ## Configure .env
-based on .env.example
+Create a .env file based on .env.example and edit the database credentials
 ```
 php artisan key:generate
 ```
