@@ -4,7 +4,7 @@ import { Link } from '@inertiajs/vue3'
 
 <template>
 	<v-app>
-		<v-app-bar prominent class="px-6 header bg-primary">
+		<v-app-bar prominent class="px-6 bg-primary">
 			<div class="d-flex align-center">
 				<v-icon start>mdi-flag-checkered</v-icon>
 				<h1>TrackMaster</h1>
@@ -19,8 +19,11 @@ import { Link } from '@inertiajs/vue3'
 				</Link>
 			</nav>
 		</v-app-bar>
-		<section class="pa-2">
+		<section>
 			<div class="main mx-auto px-2">
+				<div class="header">
+					<slot name="header"/>
+				</div>
 				<slot />
 			</div>
 		</section>
@@ -30,7 +33,14 @@ import { Link } from '@inertiajs/vue3'
 <style>
 .main {
 	max-width: 800px;
-	margin-top: 6em;
+	margin-top: 80px;
+}
+
+.header {
+	top: 80px;
+	z-index: 100;
+	position: sticky;
+	background:white;
 }
 
 nav {
