@@ -8,7 +8,7 @@ defineEmits(['delete-user'])
 </script>
 
 <template>
-	<v-table :density="compact ? 'compact' : 'comfortable'" v-if="users && users.length > 0">
+	<v-table class="mb-3" :density="compact ? 'compact' : 'comfortable'" v-if="users && users.length > 0">
 		<thead>
 			<tr>
 				<th class="text-left">

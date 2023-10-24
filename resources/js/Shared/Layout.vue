@@ -30,7 +30,7 @@ import { Link } from '@inertiajs/vue3'
 <style>
 .main {
 	max-width: 800px;
-	margin-top: 5em;
+	margin-top: 6em;
 }
 
 nav {

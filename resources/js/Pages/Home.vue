@@ -84,7 +84,7 @@ export default {
 
 		<div class="d-flex justify-space-between flex-wrap">
 
-			<h2 class="text-overline">Versenyek</h2>
+			<h2>Versenyek</h2>
 			<v-dialog width="500" v-model="newRaceDialog">
 				<template v-slot:activator="{ props }">
 					<v-btn color="success" v-bind="props"> <v-icon start>mdi-plus</v-icon> Új verseny felvétele </v-btn>
@@ -94,7 +94,7 @@ export default {
 					<v-card class="pa-5" title="Új verseny felvétele">
 						<v-form @submit.prevent="createRace(newRaceName, newRaceYear)" class="mt-5">
 							<div class="errors text-center mb-2">
-								<span color="error" v-for="error of errors">{{ error }}</span>
+								<span color="error" v-for="error, n of errors" :key="n">{{ error }}</span>
 							</div>
 							<v-text-field v-model="newRaceName" :rules="nameRules" required label="Név" @change="errors = []"></v-text-field>
 							<v-text-field v-model.number="newRaceYear" :rules="yearRules" required @change="errors = []"

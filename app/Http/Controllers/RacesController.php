@@ -21,7 +21,7 @@ class RacesController extends Controller
 				$query->select('users.id', 'name', 'email');
 			}]);
 		}])
-		->select('id', 'name', 'year')
+		->select('id', 'name', 'year')->orderBy('id', 'desc')
 		->get();
 
 		return $allRaces;

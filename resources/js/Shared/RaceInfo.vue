@@ -18,13 +18,11 @@ function newRound() {
 </script>
 
 <template>
-	<v-card class="pa-2 px-md-6">
-		<div class="d-flex align-center justify-space-between flex-wrap">
+	<v-card class="pa-3 px-md-6">
+		<div class="d-flex align-center justify-space-between flex-wrap pb-4 race-name">
 			<div class="d-flex align-center">
 				<v-icon start>mdi-flag</v-icon>
-				<span class="race-name">
-					{{ name }}
-				</span>
+				{{ name }}
 			</div>
 			{{ year }}
 		</div>
@@ -39,10 +37,11 @@ function newRound() {
 						Versenyző felvétele
 					</v-btn>
 				</div>
-				<users-table :users="round.contestants" :compact="true" show-delete-button @delete-user="(userID) => this.$emit('delete-user', round.id, userID)"></users-table>
-				<hr width="90%" class="mx-auto my-5">
+				<users-table :users="round.contestants" :compact="true" show-delete-button
+					@delete-user="(userID) => this.$emit('delete-user', round.id, userID)"></users-table>
+				<hr width="90%" class="mx-auto	">
 			</div>
-			<v-btn color="primary" @click="newRound"><v-icon>mdi-plus</v-icon> Új forduló</v-btn>
+			<v-btn color="primary" @click="newRound" class="my-3"><v-icon>mdi-plus</v-icon> Új forduló</v-btn>
 		</div>
 
 	</v-card>
