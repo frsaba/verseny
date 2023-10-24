@@ -10,9 +10,10 @@ based on .env.example
 ```
 php artisan key:generate
 ```
-## Make database migrations
+## Create and seed database
 ```
 php artisan migrate
+php artisan db:seed --class=UsersTableSeeder
 ```
 ## Run
 ```
