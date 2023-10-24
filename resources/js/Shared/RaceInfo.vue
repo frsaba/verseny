@@ -39,7 +39,7 @@ function newRound() {
 						Versenyző felvétele
 					</v-btn>
 				</div>
-				<users-table :users="round.contestants" :compact="true" @delete-user="(userID) => this.$emit('delete-user', round.id, userID)"></users-table>
+				<users-table :users="round.contestants" :compact="true" show-delete-button @delete-user="(userID) => this.$emit('delete-user', round.id, userID)"></users-table>
 				<hr width="90%" class="mx-auto my-5">
 			</div>
 			<v-btn color="primary" @click="newRound"><v-icon>mdi-plus</v-icon> Új forduló</v-btn>
