@@ -7,6 +7,9 @@ yarn
 ```
 ## Configure .env
 based on .env.example
+```
+php artisan key:generate
+```
 ## Make database migrations
 ```
 php artisan migrate
