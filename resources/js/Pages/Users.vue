@@ -61,7 +61,7 @@ export default {
 									@input="errors = []"></v-text-field>
 								<v-text-field v-model="email" :rules="emailRules" required label="Email"
 									@input="errors = []"></v-text-field>
-								<v-btn type="submit" :disabled="errors.length > 0" color="success" block outline class="mt-2">
+								<v-btn type="submit" :disabled="errors.length > 0 || !name || !email" color="success" block outline class="mt-2">
 									Létrehozás</v-btn>
 							</v-form>
 						</v-card>
