@@ -5,10 +5,10 @@ import { Link } from '@inertiajs/vue3'
 <template>
 	<v-app>
 		<v-app-bar prominent class="px-6 bg-primary">
-			<div class="d-flex align-center">
+			<Link href="/" class="d-flex align-center no-underline">
 				<v-icon start>mdi-flag-checkered</v-icon>
 				<h1>TrackMaster</h1>
-			</div>
+			</Link>
 			<v-spacer></v-spacer>
 			<nav>
 				<Link href="/" :class="{ disabled: $page.url == '/' }">
@@ -64,5 +64,8 @@ a.disabled {
 	flex-wrap: wrap;
 	gap: 0.2em;
 	height: 5em !important;
+}
+.no-underline {
+	text-decoration: none;
 }
 </style>
