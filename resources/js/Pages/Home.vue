@@ -31,10 +31,12 @@ export default {
 			this.selectedRound = round;
 			this.addToRoundDialog = true;
 		},
-		async addToRound(round, user) {
-			await this.$inertia.post(`/rounds/${round.id}/contestants`, { user_id: user });
+		async addToRound(round, contestants) {
+			for (const user of contestants) {
+				await this.$inertia.post(`/rounds/${round.id}/contestants`, { user_id: user });			
+			}
 			this.addToRoundDialog = false;
-			this.selectedContestant = null;
+			this.selectedContestants = null;
 			this.getRaces();
 		},
 		async removeUser(roundID, user) {
@@ -59,7 +61,7 @@ export default {
 		races: [],
 		newRaceDialog: false,
 		addToRoundDialog: false,
-		selectedContestant: null,
+		selectedContestants: null,
 		selectedRound: null,
 		errors: [],
 		roundID: -1,
@@ -101,7 +103,7 @@ export default {
 								<v-text-field v-model.number="newRaceYear" :rules="yearRules" required @input="errors = []"
 									label="Év"></v-text-field>
 
-								<v-btn type="submit" :disabled="errors.length > 0" color="success" block outline
+								<v-btn type="submit" :disabled="errors.length > 0 && selectedContestants.length == 0" color="success" block outline
 									class="mt-2">
 									Új verseny</v-btn>
 							</v-form>
@@ -112,10 +114,10 @@ export default {
 
 				<v-dialog width="500" v-model="addToRoundDialog">
 					<v-card class="pa-5" title="Versenyző felvétele">
-						<v-form @submit.prevent="addToRound(selectedRound, selectedContestant)" class="mt-5">
-							<v-autocomplete v-model="selectedContestant" :items="filteredUsers" item-title="name"
+						<v-form @submit.prevent="addToRound(selectedRound, selectedContestants)" class="mt-5">
+							<v-autocomplete v-model="selectedContestants" multiple :items="filteredUsers" item-title="name"
 								item-value="id" label="Válassz versenyzőt..."> </v-autocomplete>
-							<v-btn type="submit" :disabled="selectedContestant == null" color="success" block outline
+							<v-btn type="submit" :disabled="selectedContestants == null" color="success" block outline
 								class="mt-2">
 								Felvétel</v-btn>
 						</v-form>
